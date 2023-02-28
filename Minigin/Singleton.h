@@ -1,5 +1,5 @@
 #pragma once
-namespace dae
+namespace gentgine
 {
 	template <typename T>
 	class Singleton

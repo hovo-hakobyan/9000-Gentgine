@@ -41,7 +41,7 @@ void PrintSDLVersion()
 		version.major, version.minor, version.patch);
 }
 
-dae::Minigin::Minigin(const std::string &dataPath)
+gentgine::Minigin::Minigin(const std::string &dataPath)
 {
 	PrintSDLVersion();
 	
@@ -68,7 +68,7 @@ dae::Minigin::Minigin(const std::string &dataPath)
 	ResourceManager::GetInstance().Init(dataPath);
 }
 
-dae::Minigin::~Minigin()
+gentgine::Minigin::~Minigin()
 {
 	Renderer::GetInstance().Destroy();
 	SDL_DestroyWindow(g_window);
@@ -76,7 +76,7 @@ dae::Minigin::~Minigin()
 	SDL_Quit();
 }
 
-void dae::Minigin::Run(const std::function<void()>& load)
+void gentgine::Minigin::Run(const std::function<void()>& load)
 {
 	load();
 
@@ -93,7 +93,7 @@ void dae::Minigin::Run(const std::function<void()>& load)
 	{
 		const auto currentTime = std::chrono::high_resolution_clock::now();
 
-		const float deltaTime = std::chrono::duration<float>(currentTime - lastTime).count();
+		//const float deltaTime = std::chrono::duration<float>(currentTime - lastTime).count();
 
 		doContinue = input.ProcessInput();
 		sceneManager.Update();

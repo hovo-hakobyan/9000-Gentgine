@@ -1,7 +1,7 @@
 #include "Scene.h"
 #include "GameObject.h"
 
-using namespace dae;
+using namespace gentgine;
 
 unsigned int Scene::m_idCounter = 0;
 
