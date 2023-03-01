@@ -1,6 +1,7 @@
 #include <SDL.h>
 #include "Texture2D.h"
 
+
 gentgine::Texture2D::~Texture2D()
 {
 	SDL_DestroyTexture(m_texture);
@@ -18,7 +19,9 @@ SDL_Texture* gentgine::Texture2D::GetSDLTexture() const
 	return m_texture;
 }
 
+
 gentgine::Texture2D::Texture2D(SDL_Texture* texture)
 {
 	m_texture = texture;
 }
+

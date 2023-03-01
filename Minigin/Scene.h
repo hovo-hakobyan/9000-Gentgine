@@ -12,7 +12,10 @@ namespace gentgine
 		void Remove(std::shared_ptr<GameObject> object);
 		void RemoveAll();
 
+		void Awake();
 		void Update();
+		void FixedUpdate();
+		void LateUpdate();
 		void Render() const;
 
 		~Scene();

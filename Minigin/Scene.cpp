@@ -24,11 +24,35 @@ void Scene::RemoveAll()
 	m_objects.clear();
 }
 
+void gentgine::Scene::Awake()
+{
+	for (auto& object : m_objects)
+	{
+		object->Awake();
+	}
+}
+
 void Scene::Update()
 {
 	for(auto& object : m_objects)
 	{
 		object->Update();
+	}
+}
+
+void gentgine::Scene::FixedUpdate()
+{
+	for (auto& object : m_objects)
+	{
+		object->FixedUpdate();
+	}
+}
+
+void gentgine::Scene::LateUpdate()
+{
+	for (auto& object : m_objects)
+	{
+		object->LateUpdate();
 	}
 }
 

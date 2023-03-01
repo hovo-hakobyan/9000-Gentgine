@@ -9,6 +9,7 @@
 #include "SceneManager.h"
 #include "Renderer.h"
 #include "ResourceManager.h"
+#include "Time.h"
 #include "Includes.h"
 
 SDL_Window* g_window{};
@@ -83,22 +84,36 @@ void gentgine::Minigin::Run(const std::function<void()>& load)
 	auto& renderer = Renderer::GetInstance();
 	auto& sceneManager = SceneManager::GetInstance();
 	auto& input = InputManager::GetInstance();
+	auto& time = Time::GetInstance();
 
-	// todo: this update loop could use some work.
 	bool doContinue = true;
-
 	auto lastTime = std::chrono::high_resolution_clock::now();
+	float lag = 0.f;
+	const float fixedTimeStep = time.GetFixedTimeStep();
 
 	while (doContinue)
 	{
 		const auto currentTime = std::chrono::high_resolution_clock::now();
 
-		//const float deltaTime = std::chrono::duration<float>(currentTime - lastTime).count();
+		const float deltaTime = std::chrono::duration<float>(currentTime - lastTime).count();
+		time.SetDeltaTime(deltaTime);
+		lastTime = currentTime;
+		lag += deltaTime;
 
 		doContinue = input.ProcessInput();
+
+		while (lag >= fixedTimeStep)
+		{
+			sceneManager.FixedUpdate();
+			lag -= fixedTimeStep;
+		}
+
 		sceneManager.Update();
+
+		sceneManager.LateUpdate();
+
 		renderer.Render();
 
-		lastTime = currentTime;
+		
 	}
 }
